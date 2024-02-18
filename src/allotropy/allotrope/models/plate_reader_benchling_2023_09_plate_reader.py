@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Optional, Union
+from typing import Any
 
 from allotropy.allotrope.models.shared.definitions.custom import (
     TQuantityValueDegreeCelsius,
@@ -55,14 +55,14 @@ class DiagnosticTraceDocumentItem:
 
 @dataclass
 class DiagnosticTraceAggregateDocument:
-    diagnostic_trace_document: Optional[list[DiagnosticTraceDocumentItem]] = None
+    diagnostic_trace_document: list[DiagnosticTraceDocumentItem] | None = None
 
 
 @dataclass
 class DataSourceDocumentItem:
     data_source_identifier: TStringValue
     data_source_feature: TStringValue
-    field_index: Optional[int] = None
+    field_index: int | None = None
 
 
 @dataclass
@@ -268,7 +268,7 @@ class StatisticsDocumentItem:
 
 @dataclass
 class StatisticsAggregateDocument:
-    statistics_document: Optional[list[StatisticsDocumentItem]] = None
+    statistics_document: list[StatisticsDocumentItem] | None = None
 
 
 class ScanPositionSettingPlateReader(Enum):
@@ -283,45 +283,45 @@ class ScanPositionSettingPlateReader(Enum):
 class Manifest:
     vocabulary: list[str]
     json_schemas: list[str]
-    field_id: Optional[str] = None
-    field_type: Optional[str] = None
-    shapes: Optional[list[str]] = None
+    field_id: str | None = None
+    field_type: str | None = None
+    shapes: list[str] | None = None
 
 
 @dataclass
 class DeviceDocumentItem:
     device_type: TStringValue
-    device_identifier: Optional[TStringValue] = None
-    model_number: Optional[TStringValue] = None
-    product_manufacturer: Optional[TStringValue] = None
-    brand_name: Optional[TStringValue] = None
-    equipment_serial_number: Optional[TStringValue] = None
-    firmware_version: Optional[TStringValue] = None
-    field_index: Optional[int] = None
+    device_identifier: TStringValue | None = None
+    model_number: TStringValue | None = None
+    product_manufacturer: TStringValue | None = None
+    brand_name: TStringValue | None = None
+    equipment_serial_number: TStringValue | None = None
+    firmware_version: TStringValue | None = None
+    field_index: int | None = None
 
 
 @dataclass
 class DeviceSystemDocument:
     device_identifier: TStringValue
     model_number: TStringValue
-    asset_management_identifier: Optional[TStringValue] = None
-    description: Optional[Any] = None
-    brand_name: Optional[TStringValue] = None
-    product_manufacturer: Optional[TStringValue] = None
-    equipment_serial_number: Optional[TStringValue] = None
-    firmware_version: Optional[TStringValue] = None
-    device_document: Optional[list[DeviceDocumentItem]] = None
+    asset_management_identifier: TStringValue | None = None
+    description: Any | None = None
+    brand_name: TStringValue | None = None
+    product_manufacturer: TStringValue | None = None
+    equipment_serial_number: TStringValue | None = None
+    firmware_version: TStringValue | None = None
+    device_document: list[DeviceDocumentItem] | None = None
 
 
 @dataclass
 class DataSystemDocument:
-    data_system_instance_identifier: Optional[TStringValue] = None
-    file_name: Optional[TStringValue] = None
-    UNC_path: Optional[TStringValue] = None
-    software_name: Optional[TStringValue] = None
-    software_version: Optional[TStringValue] = None
-    ASM_converter_name: Optional[TStringValue] = None
-    ASM_converter_version: Optional[TStringValue] = None
+    data_system_instance_identifier: TStringValue | None = None
+    file_name: TStringValue | None = None
+    UNC_path: TStringValue | None = None
+    software_name: TStringValue | None = None
+    software_version: TStringValue | None = None
+    ASM_converter_name: TStringValue | None = None
+    ASM_converter_version: TStringValue | None = None
 
 
 @dataclass
@@ -331,10 +331,10 @@ class DataSourceAggregateDocumentModel:
 
 @dataclass
 class ProcessedDataDocumentItem:
-    data_processing_document: Optional[dict[str, Any]] = None
-    data_source_aggregate_document: Optional[DataSourceAggregateDocumentModel] = None
-    processed_data_identifier: Optional[TStringValue] = None
-    field_index: Optional[int] = None
+    data_processing_document: dict[str, Any] | None = None
+    data_source_aggregate_document: DataSourceAggregateDocumentModel | None = None
+    processed_data_identifier: TStringValue | None = None
+    field_index: int | None = None
 
 
 @dataclass
@@ -351,10 +351,10 @@ class DataSourceAggregateDocument1:
 class CalculatedDataDocumentItem:
     calculated_data_name: TStringValue
     calculated_result: TQuantityValue
-    data_source_aggregate_document: Optional[DataSourceAggregateDocument1] = None
-    calculated_data_identifier: Optional[TStringValue] = None
-    calculation_description: Optional[TStringValue] = None
-    field_index: Optional[int] = None
+    data_source_aggregate_document: DataSourceAggregateDocument1 | None = None
+    calculated_data_identifier: TStringValue | None = None
+    calculation_description: TStringValue | None = None
+    field_index: int | None = None
 
 
 @dataclass
@@ -371,10 +371,10 @@ class ProcessedDataAggregateDocumentModel:
 class CalculatedDataDocumentItem1:
     calculated_data_name: TStringValue
     calculated_result: TQuantityValue
-    data_source_aggregate_document: Optional[DataSourceAggregateDocument] = None
-    calculated_data_identifier: Optional[TStringValue] = None
-    calculation_description: Optional[TStringValue] = None
-    field_index: Optional[int] = None
+    data_source_aggregate_document: DataSourceAggregateDocument | None = None
+    calculated_data_identifier: TStringValue | None = None
+    calculation_description: TStringValue | None = None
+    field_index: int | None = None
 
 
 @dataclass
@@ -386,52 +386,50 @@ class CalculatedDataAggregateDocumentModel:
 class SampleDocument:
     sample_identifier: TStringValue
     location_identifier: TStringValue
-    description: Optional[Any] = None
-    batch_identifier: Optional[TStringValue] = None
-    sample_role_type: Optional[TClass] = None
-    written_name: Optional[TStringValue] = None
-    well_location_identifier: Optional[TStringValue] = None
-    vial_location_identifier: Optional[TStringValue] = None
-    well_plate_identifier: Optional[TStringValue] = None
-    mass_concentration: Optional[TQuantityValuePicogramPerMilliliter] = None
+    description: Any | None = None
+    batch_identifier: TStringValue | None = None
+    sample_role_type: TClass | None = None
+    written_name: TStringValue | None = None
+    well_location_identifier: TStringValue | None = None
+    vial_location_identifier: TStringValue | None = None
+    well_plate_identifier: TStringValue | None = None
+    mass_concentration: TQuantityValuePicogramPerMilliliter | None = None
 
 
 @dataclass
 class DeviceControlDocument:
     device_type: TStringValue
-    device_identifier: Optional[TStringValue] = None
-    detection_type: Optional[TStringValue] = None
-    product_manufacturer: Optional[TStringValue] = None
-    brand_name: Optional[TStringValue] = None
-    equipment_serial_number: Optional[TStringValue] = None
-    model_number: Optional[TStringValue] = None
-    firmware_version: Optional[TStringValue] = None
-    shaking_configuration_description: Optional[TStringValue] = None
-    detector_distance_setting__plate_reader_: Optional[TQuantityValueMillimeter] = None
-    integration_time: Optional[TQuantityValueSecondTime] = None
-    number_of_averages: Optional[TQuantityValueNumber] = None
-    detector_gain_setting: Optional[TStringValue] = None
-    scan_position_setting__plate_reader_: Optional[
-        ScanPositionSettingPlateReader
-    ] = None
-    detector_carriage_speed_setting: Optional[TStringValue] = None
+    device_identifier: TStringValue | None = None
+    detection_type: TStringValue | None = None
+    product_manufacturer: TStringValue | None = None
+    brand_name: TStringValue | None = None
+    equipment_serial_number: TStringValue | None = None
+    model_number: TStringValue | None = None
+    firmware_version: TStringValue | None = None
+    shaking_configuration_description: TStringValue | None = None
+    detector_distance_setting__plate_reader_: TQuantityValueMillimeter | None = None
+    integration_time: TQuantityValueSecondTime | None = None
+    number_of_averages: TQuantityValueNumber | None = None
+    detector_gain_setting: TStringValue | None = None
+    scan_position_setting__plate_reader_: ScanPositionSettingPlateReader | None = None
+    detector_carriage_speed_setting: TStringValue | None = None
 
 
 @dataclass
 class UltravioletAbsorbancePointDetectionDeviceControlDocumentItem(
     DeviceControlDocument
 ):
-    detector_wavelength_setting: Optional[TQuantityValueNanometer] = None
-    detector_bandwidth_setting: Optional[TQuantityValueNanometer] = None
-    electronic_absorbance_wavelength_setting: Optional[TQuantityValueNanometer] = None
-    electronic_absorbance_bandwidth_setting: Optional[TQuantityValueNanometer] = None
-    electronic_absorbance_reference_bandwidth_setting: Optional[
-        TQuantityValueNanometer
-    ] = None
-    electronic_absorbance_reference_wavelength_setting: Optional[
-        TQuantityValueNanometer
-    ] = None
-    field_index: Optional[int] = None
+    detector_wavelength_setting: TQuantityValueNanometer | None = None
+    detector_bandwidth_setting: TQuantityValueNanometer | None = None
+    electronic_absorbance_wavelength_setting: TQuantityValueNanometer | None = None
+    electronic_absorbance_bandwidth_setting: TQuantityValueNanometer | None = None
+    electronic_absorbance_reference_bandwidth_setting: TQuantityValueNanometer | None = (
+        None
+    )
+    electronic_absorbance_reference_wavelength_setting: TQuantityValueNanometer | None = (
+        None
+    )
+    field_index: int | None = None
 
 
 UltravioletAbsorbancePointDetectionDeviceControlDocument = list[
@@ -450,27 +448,25 @@ class UltravioletAbsorbancePointDetectionMeasurementDocumentItems:
     device_control_aggregate_document: UltravioletAbsorbancePointDetectionDeviceControlAggregateDocument
     sample_document: SampleDocument
     absorbance: TQuantityValueMilliAbsorbanceUnit
-    measurement_time: Optional[TDateTimeStampValue] = None
-    detection_type: Optional[TStringValue] = None
-    processed_data_aggregate_document: Optional[
-        ProcessedDataAggregateDocumentModel
-    ] = None
-    calculated_data_aggregate_document: Optional[
-        CalculatedDataAggregateDocumentModel
-    ] = None
-    statistics_aggregate_document: Optional[StatisticsAggregateDocument] = None
-    compartment_temperature: Optional[TQuantityValueDegreeCelsius] = None
-    mass_concentration: Optional[TQuantityValuePicogramPerMilliliter] = None
+    measurement_time: TDateTimeStampValue | None = None
+    detection_type: TStringValue | None = None
+    processed_data_aggregate_document: ProcessedDataAggregateDocumentModel | None = None
+    calculated_data_aggregate_document: CalculatedDataAggregateDocumentModel | None = (
+        None
+    )
+    statistics_aggregate_document: StatisticsAggregateDocument | None = None
+    compartment_temperature: TQuantityValueDegreeCelsius | None = None
+    mass_concentration: TQuantityValuePicogramPerMilliliter | None = None
 
 
 @dataclass
 class FluorescencePointDetectionDeviceControlDocumentItem(DeviceControlDocument):
-    detector_wavelength_setting: Optional[TQuantityValueNanometer] = None
-    detector_bandwidth_setting: Optional[TQuantityValueNanometer] = None
-    wavelength_filter_cutoff_setting: Optional[TQuantityValueNanometer] = None
-    excitation_bandwidth_setting: Optional[TQuantityValueNanometer] = None
-    excitation_wavelength_setting: Optional[TQuantityValueNanometer] = None
-    field_index: Optional[int] = None
+    detector_wavelength_setting: TQuantityValueNanometer | None = None
+    detector_bandwidth_setting: TQuantityValueNanometer | None = None
+    wavelength_filter_cutoff_setting: TQuantityValueNanometer | None = None
+    excitation_bandwidth_setting: TQuantityValueNanometer | None = None
+    excitation_wavelength_setting: TQuantityValueNanometer | None = None
+    field_index: int | None = None
 
 
 FluorescencePointDetectionDeviceControlDocument = list[
@@ -489,24 +485,22 @@ class FluorescencePointDetectionMeasurementDocumentItems:
     device_control_aggregate_document: FluorescencePointDetectionDeviceControlAggregateDocument
     sample_document: SampleDocument
     fluorescence: TQuantityValueRelativeFluorescenceUnit
-    measurement_time: Optional[TDateTimeStampValue] = None
-    detection_type: Optional[TStringValue] = None
-    processed_data_aggregate_document: Optional[
-        ProcessedDataAggregateDocumentModel
-    ] = None
-    calculated_data_aggregate_document: Optional[
-        CalculatedDataAggregateDocumentModel
-    ] = None
-    statistics_aggregate_document: Optional[StatisticsAggregateDocument] = None
-    compartment_temperature: Optional[TQuantityValueDegreeCelsius] = None
-    mass_concentration: Optional[TQuantityValuePicogramPerMilliliter] = None
+    measurement_time: TDateTimeStampValue | None = None
+    detection_type: TStringValue | None = None
+    processed_data_aggregate_document: ProcessedDataAggregateDocumentModel | None = None
+    calculated_data_aggregate_document: CalculatedDataAggregateDocumentModel | None = (
+        None
+    )
+    statistics_aggregate_document: StatisticsAggregateDocument | None = None
+    compartment_temperature: TQuantityValueDegreeCelsius | None = None
+    mass_concentration: TQuantityValuePicogramPerMilliliter | None = None
 
 
 @dataclass
 class LuminescencePointDetectionDeviceControlDocumentItem(DeviceControlDocument):
-    detector_wavelength_setting: Optional[TQuantityValueNanometer] = None
-    detector_bandwidth_setting: Optional[TQuantityValueNanometer] = None
-    field_index: Optional[int] = None
+    detector_wavelength_setting: TQuantityValueNanometer | None = None
+    detector_bandwidth_setting: TQuantityValueNanometer | None = None
+    field_index: int | None = None
 
 
 LuminescencePointDetectionDeviceControlDocument = list[
@@ -525,22 +519,20 @@ class LuminescencePointDetectionMeasurementDocumentItems:
     device_control_aggregate_document: LuminescencePointDetectionDeviceControlAggregateDocument
     sample_document: SampleDocument
     luminescence: TQuantityValueRelativeLightUnit
-    measurement_time: Optional[TDateTimeStampValue] = None
-    detection_type: Optional[TStringValue] = None
-    processed_data_aggregate_document: Optional[
-        ProcessedDataAggregateDocumentModel
-    ] = None
-    calculated_data_aggregate_document: Optional[
-        CalculatedDataAggregateDocumentModel
-    ] = None
-    statistics_aggregate_document: Optional[StatisticsAggregateDocument] = None
-    compartment_temperature: Optional[TQuantityValueDegreeCelsius] = None
-    mass_concentration: Optional[TQuantityValuePicogramPerMilliliter] = None
+    measurement_time: TDateTimeStampValue | None = None
+    detection_type: TStringValue | None = None
+    processed_data_aggregate_document: ProcessedDataAggregateDocumentModel | None = None
+    calculated_data_aggregate_document: CalculatedDataAggregateDocumentModel | None = (
+        None
+    )
+    statistics_aggregate_document: StatisticsAggregateDocument | None = None
+    compartment_temperature: TQuantityValueDegreeCelsius | None = None
+    mass_concentration: TQuantityValuePicogramPerMilliliter | None = None
 
 
 @dataclass
 class Asm:
-    field_asm_manifest: Optional[Union[str, Manifest]] = None
+    field_asm_manifest: str | Manifest | None = None
 
 
 @dataclass
@@ -548,47 +540,41 @@ class MeasurementAggregateDocument:
     measurement_time: TDateTimeStampValue
     plate_well_count: TQuantityValueNumber
     measurement_document: list[
-        Union[
-            UltravioletAbsorbancePointDetectionMeasurementDocumentItems,
-            FluorescencePointDetectionMeasurementDocumentItems,
-            LuminescencePointDetectionMeasurementDocumentItems,
-        ]
+        UltravioletAbsorbancePointDetectionMeasurementDocumentItems
+        | FluorescencePointDetectionMeasurementDocumentItems
+        | LuminescencePointDetectionMeasurementDocumentItems
     ]
-    analytical_method_identifier: Optional[TStringValue] = None
-    experimental_data_identifier: Optional[TStringValue] = None
-    experiment_type: Optional[TStringValue] = None
-    container_type: Optional[ContainerType] = None
-    well_volume: Optional[TQuantityValueMicroliter] = None
-    diagnostic_trace_aggregate_document: Optional[
-        DiagnosticTraceAggregateDocument
-    ] = None
-    processed_data_aggregate_document: Optional[
-        ProcessedDataAggregateDocumentModel
-    ] = None
-    calculated_data_aggregate_document: Optional[
-        CalculatedDataAggregateDocumentModel
-    ] = None
-    statistics_aggregate_document: Optional[StatisticsAggregateDocument] = None
+    analytical_method_identifier: TStringValue | None = None
+    experimental_data_identifier: TStringValue | None = None
+    experiment_type: TStringValue | None = None
+    container_type: ContainerType | None = None
+    well_volume: TQuantityValueMicroliter | None = None
+    diagnostic_trace_aggregate_document: DiagnosticTraceAggregateDocument | None = None
+    processed_data_aggregate_document: ProcessedDataAggregateDocumentModel | None = None
+    calculated_data_aggregate_document: CalculatedDataAggregateDocumentModel | None = (
+        None
+    )
+    statistics_aggregate_document: StatisticsAggregateDocument | None = None
 
 
 @dataclass
 class PlateReaderDocumentItem:
     measurement_aggregate_document: MeasurementAggregateDocument
-    analyst: Optional[TStringValue] = None
-    submitter: Optional[TStringValue] = None
+    analyst: TStringValue | None = None
+    submitter: TStringValue | None = None
 
 
 @dataclass
 class PlateReaderAggregateDocument:
     plate_reader_document: list[PlateReaderDocumentItem]
-    device_system_document: Optional[DeviceSystemDocument] = None
-    data_system_document: Optional[DataSystemDocument] = None
-    processed_data_aggregate_document: Optional[ProcessedDataAggregateDocument] = None
-    calculated_data_aggregate_document: Optional[CalculatedDataAggregateDocument] = None
-    statistics_aggregate_document: Optional[StatisticsAggregateDocument] = None
+    device_system_document: DeviceSystemDocument | None = None
+    data_system_document: DataSystemDocument | None = None
+    processed_data_aggregate_document: ProcessedDataAggregateDocument | None = None
+    calculated_data_aggregate_document: CalculatedDataAggregateDocument | None = None
+    statistics_aggregate_document: StatisticsAggregateDocument | None = None
 
 
 @dataclass
 class Model(Asm):
-    field_asm_manifest: Union[str, Manifest]
-    plate_reader_aggregate_document: Optional[PlateReaderAggregateDocument] = None
+    field_asm_manifest: str | Manifest
+    plate_reader_aggregate_document: PlateReaderAggregateDocument | None = None

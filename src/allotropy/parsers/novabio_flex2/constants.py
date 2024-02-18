@@ -28,11 +28,9 @@ MOLAR_CONCENTRATION_CLASSES = Union[
     TNullableQuantityValueUnitPerLiter,
 ]
 ALL_MOLAR_CONCENTRATION_CLASSES: list[
-    Union[
-        type[TNullableQuantityValueMillimolePerLiter],
-        type[TNullableQuantityValueGramPerLiter],
-        type[TNullableQuantityValueUnitPerLiter],
-    ]
+    type[TNullableQuantityValueMillimolePerLiter]
+    | type[TNullableQuantityValueGramPerLiter]
+    | type[TNullableQuantityValueUnitPerLiter]
 ] = [
     TNullableQuantityValueMillimolePerLiter,
     TNullableQuantityValueGramPerLiter,

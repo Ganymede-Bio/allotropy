@@ -1,6 +1,6 @@
 from datetime import tzinfo
 from enum import Enum
-from typing import Optional, Union
+from typing import Union
 
 from allotropy.exceptions import AllotropeConversionError
 from allotropy.parsers.agilent_gen5.agilent_gen5_parser import AgilentGen5Parser
@@ -78,7 +78,7 @@ _VENDOR_TO_PARSER: dict[Vendor, type[VendorParser]] = {
 
 
 def get_parser(
-    vendor_type: VendorType, default_timezone: Optional[tzinfo] = None
+    vendor_type: VendorType, default_timezone: tzinfo | None = None
 ) -> VendorParser:
     try:
         timestamp_parser = TimestampParser(default_timezone)

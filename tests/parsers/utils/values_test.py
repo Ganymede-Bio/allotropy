@@ -1,5 +1,3 @@
-from typing import Optional
-
 import pytest
 
 from allotropy.exceptions import AllotropeConversionError
@@ -83,11 +81,11 @@ def test_try_float_fails(value: str, expected_regex: str) -> None:
         ("1.1", 1.1),
     ],
 )
-def test_try_float_or_none(value: Optional[str], expected: Optional[int]) -> None:
+def test_try_float_or_none(value: str | None, expected: int | None) -> None:
     assert try_float_or_none(value) == expected
 
 
-def _try_int(value: Optional[str]) -> int:
+def _try_int(value: str | None) -> int:
     return try_int(value, "param")
 
 
@@ -103,7 +101,7 @@ def test_try_int() -> None:
         ("a", "Invalid integer string: 'a'."),
     ],
 )
-def test_try_int_fails(value: Optional[str], expected_regex: str) -> None:
+def test_try_int_fails(value: str | None, expected_regex: str) -> None:
     with pytest.raises(AllotropeConversionError, match=expected_regex):
         _try_int(value)
 
@@ -118,5 +116,5 @@ def test_try_int_fails(value: Optional[str], expected_regex: str) -> None:
         ("1.1", None),
     ],
 )
-def test_try_int_or_none(value: Optional[str], expected: Optional[float]) -> None:
+def test_try_int_or_none(value: str | None, expected: float | None) -> None:
     assert try_int_or_none(value) == expected

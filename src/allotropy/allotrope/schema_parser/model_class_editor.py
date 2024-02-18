@@ -5,7 +5,6 @@ import json
 import os
 from pathlib import Path
 import re
-from typing import Optional
 
 from allotropy.allotrope.schema_parser.schema_model import (
     get_all_schema_components,
@@ -93,7 +92,7 @@ class ModelClassEditor:
         self.classes_to_skip = classes_to_skip
         self.imports_to_add = imports_to_add
 
-    def _handle_class_lines(self, class_lines: ClassLines) -> Optional[list[str]]:
+    def _handle_class_lines(self, class_lines: ClassLines) -> list[str] | None:
         # Given a ClassLines object, returns the lines to add to the file.
         if class_lines.class_name in self.classes_to_skip:
             return None
@@ -105,8 +104,8 @@ class ModelClassEditor:
         return class_lines.lines
 
     def _get_class_lines(
-        self, file: io.TextIOBase, existing_lines: Optional[list[str]] = None
-    ) -> Optional[ClassLines]:
+        self, file: io.TextIOBase, existing_lines: list[str] | None = None
+    ) -> ClassLines | None:
         # Reads lines for the next class and returns as a ClassLines object.
         lines: list[str] = existing_lines or []
         started = False

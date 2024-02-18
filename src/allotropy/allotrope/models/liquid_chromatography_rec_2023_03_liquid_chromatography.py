@@ -5,7 +5,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Optional
+from typing import Any
 
 from allotropy.allotrope.models.shared.components.liquid_chromatography import (
     PeakList,
@@ -29,54 +29,54 @@ from allotropy.allotrope.models.shared.definitions.definitions import (
 @dataclass
 class DeviceDocumentItem:
     device_type: TStringValue
-    device_identifier: Optional[TStringValue] = None
-    model_number: Optional[TStringValue] = None
-    field_index: Optional[int] = None
+    device_identifier: TStringValue | None = None
+    model_number: TStringValue | None = None
+    field_index: int | None = None
 
 
 @dataclass
 class DeviceSystemDocument:
     asset_management_identifier: TStringValue
-    description: Optional[Any] = None
-    brand_name: Optional[TStringValue] = None
-    product_manufacturer: Optional[TStringValue] = None
-    pump_model_number: Optional[TStringValue] = None
-    detector_model_number: Optional[TStringValue] = None
-    device_document: Optional[list[DeviceDocumentItem]] = None
+    description: Any | None = None
+    brand_name: TStringValue | None = None
+    product_manufacturer: TStringValue | None = None
+    pump_model_number: TStringValue | None = None
+    detector_model_number: TStringValue | None = None
+    device_document: list[DeviceDocumentItem] | None = None
 
 
 @dataclass
 class ChromatographyColumnDocument:
-    chromatography_column_particle_size: Optional[TQuantityValueMicrometer] = None
-    chromatography_column_chemistry_type: Optional[TStringValue] = None
-    chromatography_column_serial_number: Optional[TStringValue] = None
-    column_inner_diameter: Optional[TQuantityValueMillimeter] = None
-    product_manufacturer: Optional[TStringValue] = None
-    chromatography_column_length: Optional[TQuantityValueCentimeter] = None
-    chromatography_column_part_number: Optional[TStringValue] = None
+    chromatography_column_particle_size: TQuantityValueMicrometer | None = None
+    chromatography_column_chemistry_type: TStringValue | None = None
+    chromatography_column_serial_number: TStringValue | None = None
+    column_inner_diameter: TQuantityValueMillimeter | None = None
+    product_manufacturer: TStringValue | None = None
+    chromatography_column_length: TQuantityValueCentimeter | None = None
+    chromatography_column_part_number: TStringValue | None = None
 
 
 @dataclass
 class DeviceControlDocumentItem:
     device_type: TStringValue
-    device_identifier: Optional[TStringValue] = None
-    product_manufacturer: Optional[TStringValue] = None
-    brand_name: Optional[TStringValue] = None
-    equipment_serial_number: Optional[TStringValue] = None
-    model_number: Optional[TStringValue] = None
-    firmware_version: Optional[TStringValue] = None
-    detection_type: Optional[TStringValue] = None
-    electronic_absorbance_wavelength_setting: Optional[TQuantityValueNanometer] = None
-    electronic_absorbance_bandwidth_setting: Optional[TQuantityValueNanometer] = None
-    electronic_absorbance_reference_bandwidth_setting: Optional[
-        TQuantityValueNanometer
-    ] = None
-    electronic_absorbance_reference_wavelength_setting: Optional[
-        TQuantityValueNanometer
-    ] = None
-    detector_offset_setting: Optional[TQuantityValue] = None
-    detector_sampling_rate_setting: Optional[TQuantityValueHertz] = None
-    field_index: Optional[int] = None
+    device_identifier: TStringValue | None = None
+    product_manufacturer: TStringValue | None = None
+    brand_name: TStringValue | None = None
+    equipment_serial_number: TStringValue | None = None
+    model_number: TStringValue | None = None
+    firmware_version: TStringValue | None = None
+    detection_type: TStringValue | None = None
+    electronic_absorbance_wavelength_setting: TQuantityValueNanometer | None = None
+    electronic_absorbance_bandwidth_setting: TQuantityValueNanometer | None = None
+    electronic_absorbance_reference_bandwidth_setting: TQuantityValueNanometer | None = (
+        None
+    )
+    electronic_absorbance_reference_wavelength_setting: TQuantityValueNanometer | None = (
+        None
+    )
+    detector_offset_setting: TQuantityValue | None = None
+    detector_sampling_rate_setting: TQuantityValueHertz | None = None
+    field_index: int | None = None
 
 
 @dataclass
@@ -87,8 +87,8 @@ class DeviceControlAggregateDocument:
 @dataclass
 class SampleDocument:
     sample_identifier: TStringValue
-    description: Optional[Any] = None
-    written_name: Optional[TStringValue] = None
+    description: Any | None = None
+    written_name: TStringValue | None = None
 
 
 @dataclass
@@ -100,18 +100,18 @@ class InjectionDocument:
 
 @dataclass
 class ProcessedDataDocument:
-    peak_list: Optional[PeakList] = None
+    peak_list: PeakList | None = None
 
 
 @dataclass
 class DiagnosticTraceDocumentItem:
     description: Any
-    data_cube: Optional[TDatacube] = None
+    data_cube: TDatacube | None = None
 
 
 @dataclass
 class DiagnosticTraceAggregateDocument:
-    diagnostic_trace_document: Optional[list[DiagnosticTraceDocumentItem]] = None
+    diagnostic_trace_document: list[DiagnosticTraceDocumentItem] | None = None
 
 
 @dataclass
@@ -122,12 +122,10 @@ class MeasurementDocumentItem:
     injection_document: InjectionDocument
     detection_type: TStringValue
     chromatogram_data_cube: TDatacube
-    measurement_identifier: Optional[TStringValue] = None
-    three_dimensional_ultraviolet_spectrum_data_cube: Optional[TDatacube] = None
-    processed_data_document: Optional[ProcessedDataDocument] = None
-    diagnostic_trace_aggregate_document: Optional[
-        DiagnosticTraceAggregateDocument
-    ] = None
+    measurement_identifier: TStringValue | None = None
+    three_dimensional_ultraviolet_spectrum_data_cube: TDatacube | None = None
+    processed_data_document: ProcessedDataDocument | None = None
+    diagnostic_trace_aggregate_document: DiagnosticTraceAggregateDocument | None = None
 
 
 @dataclass
@@ -139,7 +137,7 @@ class MeasurementAggregateDocument:
 class LiquidChromatographyDocumentItem:
     analyst: TStringValue
     measurement_aggregate_document: MeasurementAggregateDocument
-    submitter: Optional[TStringValue] = None
+    submitter: TStringValue | None = None
 
 
 @dataclass
@@ -150,7 +148,7 @@ class LiquidChromatographyAggregateDocument:
 
 @dataclass
 class Model:
-    liquid_chromatography_aggregate_document: Optional[
-        LiquidChromatographyAggregateDocument
-    ] = None
+    liquid_chromatography_aggregate_document: LiquidChromatographyAggregateDocument | None = (
+        None
+    )
     manifest: str = "http://purl.allotrope.org/manifests/liquid-chromatography/REC/2023/03/liquid-chromatography.manifest"

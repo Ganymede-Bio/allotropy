@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from typing import Any, Optional, TypeVar, Union
+from typing import Any, TypeVar, Union
 
 import pandas as pd
 
@@ -10,7 +10,7 @@ from allotropy.exceptions import AllotropeConversionError
 PrimitiveValue = Union[str, int, float]
 
 
-def try_int(value: Optional[str], value_name: str) -> int:
+def try_int(value: str | None, value_name: str) -> int:
     try:
         return int(assert_not_none(value, value_name))
     except ValueError as e:
@@ -18,7 +18,7 @@ def try_int(value: Optional[str], value_name: str) -> int:
         raise AllotropeConversionError(msg) from e
 
 
-def try_int_or_none(value: Optional[str]) -> Optional[int]:
+def try_int_or_none(value: str | None) -> int | None:
     try:
         return int(value or "")
     except ValueError:
@@ -34,7 +34,7 @@ def try_float(value: str, value_name: str) -> float:
         raise AllotropeConversionError(msg) from e
 
 
-def try_float_or_none(value: Optional[str]) -> Optional[float]:
+def try_float_or_none(value: str | None) -> float | None:
     try:
         return float(value or "")
     except ValueError:
@@ -53,7 +53,7 @@ T = TypeVar("T")
 
 
 def assert_not_none(
-    value: Optional[T], name: Optional[str] = None, msg: Optional[str] = None
+    value: T | None, name: str | None = None, msg: str | None = None
 ) -> T:
     if value is None:
         error = msg or f"Expected non-null value{f' for {name}' if name else ''}."
@@ -89,7 +89,7 @@ def try_str_from_series_or_default(
 def try_str_from_series_or_none(
     data: pd.Series[Any],
     key: str,
-) -> Optional[str]:
+) -> str | None:
     value = data.get(key)
     return None if value is None else str(value)
 
@@ -97,7 +97,7 @@ def try_str_from_series_or_none(
 def try_str_from_series(
     series: pd.Series[Any],
     key: str,
-    msg: Optional[str] = None,
+    msg: str | None = None,
 ) -> str:
     return assert_not_none(try_str_from_series_or_none(series, key), key, msg)
 
@@ -105,7 +105,7 @@ def try_str_from_series(
 def try_int_from_series_or_none(
     data: pd.Series[Any],
     key: str,
-) -> Optional[int]:
+) -> int | None:
     try:
         value = data.get(key)
         return try_int(str(value), key)
@@ -117,7 +117,7 @@ def try_int_from_series_or_none(
 def try_int_from_series(
     data: pd.Series[Any],
     key: str,
-    msg: Optional[str] = None,
+    msg: str | None = None,
 ) -> int:
     return assert_not_none(try_int_from_series_or_none(data, key), key, msg)
 
@@ -125,7 +125,7 @@ def try_int_from_series(
 def try_float_from_series_or_none(
     data: pd.Series[Any],
     key: str,
-) -> Optional[float]:
+) -> float | None:
     try:
         value = data.get(key)
         return try_float_or_none(str(value))
@@ -137,7 +137,7 @@ def try_float_from_series_or_none(
 def try_float_from_series(
     data: pd.Series[Any],
     key: str,
-    msg: Optional[str] = None,
+    msg: str | None = None,
 ) -> float:
     return assert_not_none(try_float_from_series_or_none(data, key), key, msg)
 
@@ -145,7 +145,7 @@ def try_float_from_series(
 def try_bool_from_series_or_none(
     data: pd.Series[Any],
     key: str,
-) -> Optional[bool]:
+) -> bool | None:
     try:
         value = data.get(key)
         return None if value is None else bool(value)
@@ -159,5 +159,5 @@ def num_to_chars(n: int) -> str:
     return "" if n < 0 else num_to_chars(d - 1) + chr(m + 65)  # chr(65) = 'A'
 
 
-def str_or_none(value: Any) -> Optional[str]:
+def str_or_none(value: Any) -> str | None:
     return None if value is None else str(value)

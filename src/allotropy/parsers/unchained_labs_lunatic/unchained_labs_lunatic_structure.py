@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Optional
+from typing import Any
 
 import pandas as pd
 
@@ -45,7 +45,7 @@ class Measurement:
     absorbance: float
     sample_identifier: str
     location_identifier: str
-    well_plate_identifier: Optional[str]
+    well_plate_identifier: str | None
     calculated_data: list[CalculatedDataItem]
 
     @staticmethod
@@ -108,7 +108,7 @@ class Measurement:
 @dataclass(frozen=True)
 class WellPlate:
     measurement_time: str
-    analytical_method_identifier: Optional[str]
+    analytical_method_identifier: str | None
     measurements: list[Measurement]
 
     @staticmethod

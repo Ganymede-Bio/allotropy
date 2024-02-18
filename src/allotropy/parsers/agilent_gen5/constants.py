@@ -1,5 +1,4 @@
 from enum import Enum
-from typing import Optional
 
 
 class ReadMode(str, Enum):
@@ -15,7 +14,7 @@ class ReadType(str, Enum):
     SPECTRAL = "Spectral"
 
 
-READTYPE_TO_DIMENSIONS: dict[ReadType, list[tuple[str, str, Optional[str]]]] = {
+READTYPE_TO_DIMENSIONS: dict[ReadType, list[tuple[str, str, str | None]]] = {
     ReadType.ENDPOINT: [("int", "wavelength", "nm")],
     ReadType.KINETIC: [("double", "time", "s")],
     ReadType.AREASCAN: [

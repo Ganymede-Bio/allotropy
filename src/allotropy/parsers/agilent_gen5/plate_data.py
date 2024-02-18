@@ -5,7 +5,6 @@ from __future__ import annotations
 from collections import defaultdict
 from dataclasses import dataclass
 from io import StringIO
-from typing import Optional, Union
 
 import numpy as np
 import pandas as pd
@@ -46,7 +45,7 @@ METADATA_PREFIXES = frozenset(
 GEN5_DATETIME_FORMAT = "%m/%d/%Y %I:%M:%S %p"
 
 
-def try_float(value: str) -> Union[str, float]:
+def try_float(value: str) -> str | float:
     try:
         return float(value)
     except ValueError:
@@ -274,7 +273,7 @@ class LayoutData:
 
 @dataclass(frozen=True)
 class ActualTemperature:
-    value: Optional[float] = None
+    value: float | None = None
 
     @staticmethod
     def create_default() -> ActualTemperature:
@@ -331,7 +330,7 @@ class Results:
                 well_pos = f"{current_row}{col_num}"
                 if well_pos not in self.wells:
                     self.wells.append(well_pos)
-                well_value: Union[str, float] = try_float(values[col_num])
+                well_value: str | float = try_float(values[col_num])
                 if Results._is_processed_data_label(
                     label,
                     plate_type.read_mode,
@@ -402,7 +401,7 @@ class CurveName:
                     "feature": try_float(value),
                     "group": f"{plate_number.plate_barcode} {results.wells[0]}-{results.wells[-1]}",
                 }
-                for key, value in zip(keys, values)
+                for key, value in zip(keys, values, strict=False)
             ]
         )
 
@@ -443,10 +442,12 @@ class KineticData:
             values = df[well_pos].tolist()
             if has_temperatures:
                 results.measurements[well_pos].extend(
-                    list(zip(kinetic_times, values, temperatures))
+                    list(zip(kinetic_times, values, temperatures, strict=False))
                 )
             else:
-                results.measurements[well_pos].extend(list(zip(kinetic_times, values)))
+                results.measurements[well_pos].extend(
+                    list(zip(kinetic_times, values, strict=False))
+                )
 
         return KineticData(
             temperatures=temperatures,

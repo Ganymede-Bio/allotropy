@@ -1,7 +1,7 @@
 from collections.abc import Iterator
 from io import StringIO
 from re import search
-from typing import Literal, Optional, Union
+from typing import Literal, Optional
 
 import chardet
 import pandas as pd
@@ -13,7 +13,7 @@ from allotropy.types import IOType
 EMPTY_STR_PATTERN = r"^\s*$"
 
 
-def read_to_lines(io_: IOType, encoding: Optional[str] = "UTF-8") -> list[str]:
+def read_to_lines(io_: IOType, encoding: str | None = "UTF-8") -> list[str]:
     stream_contents = io_.read()
     raw_contents = (
         _decode(stream_contents, encoding)
@@ -24,7 +24,7 @@ def read_to_lines(io_: IOType, encoding: Optional[str] = "UTF-8") -> list[str]:
     return contents.split("\n")
 
 
-def _decode(bytes_content: bytes, encoding: Optional[str]) -> str:
+def _decode(bytes_content: bytes, encoding: str | None) -> str:
     if not encoding:
         encoding = chardet.detect(bytes_content)["encoding"]
         if not encoding:
@@ -47,10 +47,10 @@ class LinesReader:
     def current_line_exists(self) -> bool:
         return self.line_exists(self.current_line)
 
-    def get_line(self, line: int) -> Optional[str]:
+    def get_line(self, line: int) -> str | None:
         return self.lines[line] if self.line_exists(line) else None
 
-    def get(self) -> Optional[str]:
+    def get(self) -> str | None:
         return self.lines[self.current_line] if self.current_line_exists() else None
 
     def match(self, match_pat: str) -> bool:
@@ -60,41 +60,41 @@ class LinesReader:
     def is_empty(self, empty_pat: str = EMPTY_STR_PATTERN) -> bool:
         return self.match(empty_pat)
 
-    def pop(self) -> Optional[str]:
+    def pop(self) -> str | None:
         line = self.get()
         if line is not None:
             self.current_line += 1
         return line
 
-    def pop_if_match(self, match_pat: str) -> Optional[str]:
+    def pop_if_match(self, match_pat: str) -> str | None:
         return self.pop() if self.match(match_pat) else None
 
-    def pop_data(self) -> Optional[str]:
+    def pop_data(self) -> str | None:
         self.drop_empty()
         return self.pop()
 
-    def drop_until(self, match_pat: str) -> Optional[str]:
+    def drop_until(self, match_pat: str) -> str | None:
         while self.current_line_exists() and not self.match(match_pat):
             self.pop()
         return self.get()
 
-    def drop_until_inclusive(self, match_pat: str) -> Optional[str]:
+    def drop_until_inclusive(self, match_pat: str) -> str | None:
         self.drop_until(match_pat)
         return self.pop()
 
-    def drop_empty(self, empty_pat: str = EMPTY_STR_PATTERN) -> Optional[str]:
+    def drop_empty(self, empty_pat: str = EMPTY_STR_PATTERN) -> str | None:
         while self.current_line_exists() and self.is_empty(empty_pat):
             self.pop()
         return self.get()
 
-    def drop_until_empty(self, empty_pat: str = EMPTY_STR_PATTERN) -> Optional[str]:
+    def drop_until_empty(self, empty_pat: str = EMPTY_STR_PATTERN) -> str | None:
         while self.current_line_exists() and not self.is_empty(empty_pat):
             self.pop()
         return self.get()
 
     def drop_until_empty_inclusive(
         self, empty_pat: str = EMPTY_STR_PATTERN
-    ) -> Optional[str]:
+    ) -> str | None:
         self.drop_until_empty(empty_pat)
         return self.pop()
 
@@ -122,10 +122,10 @@ class CsvReader(LinesReader):
         self,
         empty_pat: str = EMPTY_STR_PATTERN,
         *,
-        header: Optional[Union[int, Literal["infer"]]] = None,
-        sep: Optional[str] = ",",
+        header: int | Literal["infer"] | None = None,
+        sep: str | None = ",",
         as_str: bool = False,
-    ) -> Optional[pd.DataFrame]:
+    ) -> pd.DataFrame | None:
         if lines := self.pop_csv_block_as_lines(empty_pat):
             return read_csv(
                 StringIO("\n".join(lines)),

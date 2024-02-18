@@ -1,7 +1,7 @@
 # mypy: disallow_any_generics = False
 
 from abc import ABC, abstractmethod
-from typing import Any, Optional
+from typing import Any
 
 from allotropy.allotrope.models.shared.components.plate_reader import (
     ProcessedDataAggregateDocument,
@@ -32,10 +32,10 @@ class DataPoint(ABC):
         measurements: list[Any],
         well_location: str,
         plate_barcode: str,
-        sample_identifier: Optional[str],
-        concentration: Optional[float],
+        sample_identifier: str | None,
+        concentration: float | None,
         processed_data: list[list],
-        temperature: Optional[float],
+        temperature: float | None,
     ):
         self.read_type = read_type
         self.measurements = measurements

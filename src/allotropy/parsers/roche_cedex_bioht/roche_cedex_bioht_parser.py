@@ -57,7 +57,7 @@ class RocheCedexBiohtParser(VendorParser):
             molar_concentrations,
         ) in sample.analyte_list.molar_concentration_dict.items():
             for sample_measurement, molar_concentration in zip(
-                sample_measurements, molar_concentrations
+                sample_measurements, molar_concentrations, strict=False
             ):
                 sample_measurement.analyte_aggregate_document.analyte_document.append(  # type: ignore[union-attr]
                     AnalyteDocumentItem(
@@ -67,7 +67,9 @@ class RocheCedexBiohtParser(VendorParser):
                 )
 
         for analyte_name, values in sample.analyte_list.non_aggregrable_dict.items():
-            for sample_measurement, value in zip(sample_measurements, values):
+            for sample_measurement, value in zip(
+                sample_measurements, values, strict=False
+            ):
                 setattr(sample_measurement, analyte_name, value)
 
         return sample_measurements

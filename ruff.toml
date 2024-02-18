@@ -1,3 +1,3 @@
 extend = "pyproject.toml"
-target-version = "py39"
-extend-select = ["UP"] # enable pyupgrade
+target-version = "py311"
+lint.extend-select = ["UP"] # enable pyupgrade

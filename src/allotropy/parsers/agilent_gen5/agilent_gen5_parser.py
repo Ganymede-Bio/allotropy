@@ -1,5 +1,5 @@
 import itertools
-from typing import Any, Union
+from typing import Any
 
 from allotropy.allotrope.models.fluorescence_benchling_2023_09_fluorescence import (
     ContainerType as FluorescenceContainerType,
@@ -34,7 +34,7 @@ from allotropy.parsers.vendor_parser import VendorParser
 class AgilentGen5Parser(VendorParser):
     def _create_model(
         self, first_plate: PlateData, measurement_docs: list[Any]
-    ) -> Union[AbsorbanceModel, FluorescenceModel, LuminescenceModel]:
+    ) -> AbsorbanceModel | FluorescenceModel | LuminescenceModel:
         if first_plate.plate_type.read_mode == ReadMode.ABSORBANCE:
             return AbsorbanceModel(
                 measurement_aggregate_document=AbsorbanceMeasurementAggregateDocument(

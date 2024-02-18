@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Any, Optional
+from typing import Any
 
 import pandas as pd
 
@@ -90,7 +90,7 @@ class ViCellXRParser(VendorParser):
             ),
         )
 
-    def _get_device_serial_number(self, file_info: pd.Series[Any]) -> Optional[str]:
+    def _get_device_serial_number(self, file_info: pd.Series[Any]) -> str | None:
         serial = str(file_info["serial"])
         try:
             serial_number = serial[serial.rindex(":") + 1 :].strip()

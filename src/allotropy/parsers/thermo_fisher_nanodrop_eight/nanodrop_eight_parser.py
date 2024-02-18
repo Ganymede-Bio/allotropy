@@ -1,5 +1,5 @@
 from collections.abc import Mapping
-from typing import Optional, Union
+from typing import Union
 
 import pandas as pd
 
@@ -73,7 +73,7 @@ CONCENTRATION_UNIT_TO_TQUANTITY: Mapping[str, ConcentrationClassType] = {
 }
 
 
-def _get_str_or_none(data_frame: pd.DataFrame, row: int, column: str) -> Optional[str]:
+def _get_str_or_none(data_frame: pd.DataFrame, row: int, column: str) -> str | None:
     if column not in data_frame.columns:
         return None
 
@@ -99,9 +99,7 @@ def _get_float(data_frame: pd.DataFrame, row: int, column: str) -> JsonFloat:
         return InvalidJsonFloat.NaN
 
 
-def _get_concentration(
-    conc: JsonFloat, unit: Optional[str]
-) -> Optional[ConcentrationType]:
+def _get_concentration(conc: JsonFloat, unit: str | None) -> ConcentrationType | None:
     if unit and unit in CONCENTRATION_UNIT_TO_TQUANTITY and isinstance(conc, float):
         cls = CONCENTRATION_UNIT_TO_TQUANTITY[unit]
         return cls(value=conc)
@@ -326,7 +324,7 @@ class NanodropEightParser(VendorParser):
 
         return measurement_docs
 
-    def _get_concentration_col(self, data: pd.DataFrame) -> Optional[str]:
+    def _get_concentration_col(self, data: pd.DataFrame) -> str | None:
         for col in data.columns:
             if col.lower() in ["conc.", "conc", "concentration"]:
                 return col

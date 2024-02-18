@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from itertools import zip_longest
 from pathlib import Path
 import shutil
-from typing import Optional, Union
+from typing import Union
 
 PathType = Union[Path, str]
 
@@ -45,7 +45,7 @@ def _remove_backup(path: PathType) -> None:
 
 @contextmanager
 def backup(
-    paths: Union[list[PathType], PathType], *, restore: Optional[bool] = False
+    paths: list[PathType] | PathType, *, restore: bool | None = False
 ) -> Iterator[None]:
     paths = paths if isinstance(paths, list) else [paths]
     for path in paths:

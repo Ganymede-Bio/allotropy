@@ -3,7 +3,6 @@ import os
 from pathlib import Path
 import re
 import subprocess  # noqa: S404, RUF100
-from typing import Optional
 
 from autoflake import fix_file  # type: ignore[import-untyped]
 from datamodel_code_generator import (
@@ -101,8 +100,8 @@ def _generate_schema(
 def generate_schemas(
     root_dir: Path,
     *,
-    dry_run: Optional[bool] = False,
-    schema_regex: Optional[str] = None,
+    dry_run: bool | None = False,
+    schema_regex: str | None = None,
 ) -> list[str]:
     """Generate schemas from JSON schema files.
 
