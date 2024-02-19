@@ -51,35 +51,17 @@ class PeakItem:
     chromatographic_peak_asymmetry_factor: TQuantityValueUnitless | None = None
     asymmetry_factor_measured_at_baseline: TQuantityValueUnitless | None = None
     chromatographic_peak_resolution: TQuantityValueUnitless | None = None
-    chromatographic_peak_resolution_using_baseline_peak_widths: TQuantityValueUnitless | None = (
-        None
-    )
-    chromatographic_peak_resolution_using_peak_width_at_half_height: TQuantityValueUnitless | None = (
-        None
-    )
-    chromatographic_peak_resolution_using_statistical_moments: TQuantityValueUnitless | None = (
-        None
-    )
+    chromatographic_peak_resolution_using_baseline_peak_widths: TQuantityValueUnitless | None = None
+    chromatographic_peak_resolution_using_peak_width_at_half_height: TQuantityValueUnitless | None = None
+    chromatographic_peak_resolution_using_statistical_moments: TQuantityValueUnitless | None = None
     number_of_theoretical_plates__chromatography_: TQuantityValueUnitless | None = None
-    number_of_theoretical_plates_measured_at_60_7___of_peak_height: TQuantityValueUnitless | None = (
-        None
-    )
-    number_of_theoretical_plates_measured_at_32_4___of_peak_height: TQuantityValueUnitless | None = (
-        None
-    )
-    number_of_theoretical_plates_measured_at_13_4___of_peak_height: TQuantityValueUnitless | None = (
-        None
-    )
-    number_of_theoretical_plates_measured_at_4_4___of_peak_height: TQuantityValueUnitless | None = (
-        None
-    )
+    number_of_theoretical_plates_measured_at_60_7___of_peak_height: TQuantityValueUnitless | None = None
+    number_of_theoretical_plates_measured_at_32_4___of_peak_height: TQuantityValueUnitless | None = None
+    number_of_theoretical_plates_measured_at_13_4___of_peak_height: TQuantityValueUnitless | None = None
+    number_of_theoretical_plates_measured_at_4_4___of_peak_height: TQuantityValueUnitless | None = None
     number_of_theoretical_plates_by_tangent_method: TQuantityValueUnitless | None = None
-    number_of_theoretical_plates_by_peak_width_at_half_height: TQuantityValueUnitless | None = (
-        None
-    )
-    number_of_theoretical_plates_by_peak_width_at_half_height__JP14_: TQuantityValueUnitless | None = (
-        None
-    )
+    number_of_theoretical_plates_by_peak_width_at_half_height: TQuantityValueUnitless | None = None
+    number_of_theoretical_plates_by_peak_width_at_half_height__JP14_: TQuantityValueUnitless | None = None
 
     def __post_init__(self) -> None:
         any_of_keys = [

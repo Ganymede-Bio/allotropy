@@ -145,7 +145,6 @@ def test_header_builder_no_header_then_raise() -> None:
 
 @pytest.mark.short
 def test_results_builder() -> None:
-
     data = pd.DataFrame(
         {
             "Well": [1],

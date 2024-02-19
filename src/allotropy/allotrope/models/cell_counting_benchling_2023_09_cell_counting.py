@@ -102,18 +102,14 @@ class ProcessedDataDocument:
     viability__cell_counter_: TQuantityValuePercent
     viable_cell_density__cell_counter_: TQuantityValueMillionCellsPerMilliliter
     total_cell_count: TQuantityValueCell
-    total_cell_density__cell_counter_: TQuantityValueMillionCellsPerMilliliter | None = (
-        None
-    )
+    total_cell_density__cell_counter_: TQuantityValueMillionCellsPerMilliliter | None = None
     dead_cell_density__cell_counter_: TQuantityValueMillionCellsPerMilliliter | None = (
         None
     )
     average_total_cell_diameter: TQuantityValueMicrometer | None = None
     average_live_cell_diameter__cell_counter_: TQuantityValueMicrometer | None = None
     average_dead_cell_diameter__cell_counter_: TQuantityValueMicrometer | None = None
-    total_cell_diameter_distribution_data_cube: TotalCellDiameterDistributionDataCube | None = (
-        None
-    )
+    total_cell_diameter_distribution_data_cube: TotalCellDiameterDistributionDataCube | None = None
     viable_cell_count: TQuantityValueCell | None = None
     dead_cell_count: TQuantityValueCell | None = None
     average_total_cell_circularity: TQuantityValueUnitless | None = None

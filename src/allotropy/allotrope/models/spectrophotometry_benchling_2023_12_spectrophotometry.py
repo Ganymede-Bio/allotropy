@@ -356,9 +356,7 @@ class ProcessedDataDocumentItem:
     data_processing_document: DataProcessingDocument | None = None
     data_source_aggregate_document: DataSourceAggregateDocument | None = None
     processed_data_identifier: TStringValue | None = None
-    mass_concentration: TQuantityValueNanogramPerMicroliter | TQuantityValueMicrogramPerMicroliter | TQuantityValuePicogramPerMilliliter | TQuantityValueNanogramPerMilliliter | TQuantityValueMicrogramPerMilliliter | TQuantityValueMilligramPerMilliliter | None = (
-        None
-    )
+    mass_concentration: TQuantityValueNanogramPerMicroliter | TQuantityValueMicrogramPerMicroliter | TQuantityValuePicogramPerMilliliter | TQuantityValueNanogramPerMilliliter | TQuantityValueMicrogramPerMilliliter | TQuantityValueMilligramPerMilliliter | None = None
     field_index: int | None = None
 
 
@@ -393,12 +391,8 @@ class UltravioletAbsorbancePointDetectionDeviceControlDocumentItem(
     detector_bandwidth_setting: TQuantityValueNanometer | None = None
     electronic_absorbance_wavelength_setting: TQuantityValueNanometer | None = None
     electronic_absorbance_bandwidth_setting: TQuantityValueNanometer | None = None
-    electronic_absorbance_reference_bandwidth_setting: TQuantityValueNanometer | None = (
-        None
-    )
-    electronic_absorbance_reference_wavelength_setting: TQuantityValueNanometer | None = (
-        None
-    )
+    electronic_absorbance_reference_bandwidth_setting: TQuantityValueNanometer | None = None
+    electronic_absorbance_reference_wavelength_setting: TQuantityValueNanometer | None = None
     field_index: int | None = None
 
 

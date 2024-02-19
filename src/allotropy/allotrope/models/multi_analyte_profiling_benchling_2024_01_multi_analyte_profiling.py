@@ -234,6 +234,4 @@ class MultiAnalyteProfilingAggregateDocument:
 @dataclass
 class Model(Asm):
     field_asm_manifest: str | Manifest
-    multi_analyte_profiling_aggregate_document: MultiAnalyteProfilingAggregateDocument | None = (
-        None
-    )
+    multi_analyte_profiling_aggregate_document: MultiAnalyteProfilingAggregateDocument | None = None

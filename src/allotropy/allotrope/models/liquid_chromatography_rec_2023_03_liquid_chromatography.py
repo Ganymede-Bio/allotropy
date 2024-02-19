@@ -68,12 +68,8 @@ class DeviceControlDocumentItem:
     detection_type: TStringValue | None = None
     electronic_absorbance_wavelength_setting: TQuantityValueNanometer | None = None
     electronic_absorbance_bandwidth_setting: TQuantityValueNanometer | None = None
-    electronic_absorbance_reference_bandwidth_setting: TQuantityValueNanometer | None = (
-        None
-    )
-    electronic_absorbance_reference_wavelength_setting: TQuantityValueNanometer | None = (
-        None
-    )
+    electronic_absorbance_reference_bandwidth_setting: TQuantityValueNanometer | None = None
+    electronic_absorbance_reference_wavelength_setting: TQuantityValueNanometer | None = None
     detector_offset_setting: TQuantityValue | None = None
     detector_sampling_rate_setting: TQuantityValueHertz | None = None
     field_index: int | None = None
@@ -148,7 +144,5 @@ class LiquidChromatographyAggregateDocument:
 
 @dataclass
 class Model:
-    liquid_chromatography_aggregate_document: LiquidChromatographyAggregateDocument | None = (
-        None
-    )
+    liquid_chromatography_aggregate_document: LiquidChromatographyAggregateDocument | None = None
     manifest: str = "http://purl.allotrope.org/manifests/liquid-chromatography/REC/2023/03/liquid-chromatography.manifest"
