@@ -1,6 +1,6 @@
 from collections import defaultdict
 from enum import Enum
-from typing import Any, cast, TypeVar, Union
+from typing import Any, cast, TypeVar
 
 from allotropy.allotrope.models.plate_reader_benchling_2023_09_plate_reader import (
     CalculatedDataAggregateDocument,
@@ -63,19 +63,9 @@ class ReadType(Enum):
     LUMINESCENCE = "Luminescence"
 
 
-MeasurementDocumentItems = Union[
-    UltravioletAbsorbancePointDetectionMeasurementDocumentItems,
-    FluorescencePointDetectionMeasurementDocumentItems,
-    LuminescencePointDetectionMeasurementDocumentItems,
-]
+MeasurementDocumentItems = UltravioletAbsorbancePointDetectionMeasurementDocumentItems | FluorescencePointDetectionMeasurementDocumentItems | LuminescencePointDetectionMeasurementDocumentItems
 
-
-DeviceControlAggregateDocument = Union[
-    UltravioletAbsorbancePointDetectionDeviceControlAggregateDocument,
-    FluorescencePointDetectionDeviceControlAggregateDocument,
-    LuminescencePointDetectionDeviceControlAggregateDocument,
-]
-
+DeviceControlAggregateDocument = UltravioletAbsorbancePointDetectionDeviceControlAggregateDocument | FluorescencePointDetectionDeviceControlAggregateDocument | LuminescencePointDetectionDeviceControlAggregateDocument
 
 def safe_value(cls: type[T], value: Any | None) -> T | None:
     return None if value is None else cls(value=value)  # type: ignore[call-arg]

@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 import re
-from typing import Any, TypeVar, Union
+from typing import Any, TypeVar
 
 import pandas as pd
 
 from allotropy.exceptions import AllotropeConversionError
 
-PrimitiveValue = Union[str, int, float]
+PrimitiveValue = str | int | float
 
 
 def try_int(value: str | None, value_name: str) -> int:

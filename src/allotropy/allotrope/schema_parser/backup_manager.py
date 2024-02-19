@@ -3,9 +3,8 @@ from contextlib import contextmanager
 from itertools import zip_longest
 from pathlib import Path
 import shutil
-from typing import Union
 
-PathType = Union[Path, str]
+PathType = Path | str
 
 
 def _files_equal(path1: PathType, path2: PathType) -> bool:

@@ -1,6 +1,5 @@
 from datetime import tzinfo
 from enum import Enum
-from typing import Union
 
 from allotropy.exceptions import AllotropeConversionError
 from allotropy.parsers.agilent_gen5.agilent_gen5_parser import AgilentGen5Parser
@@ -56,7 +55,7 @@ class Vendor(Enum):
     UNCHAINED_LABS_LUNATIC = "UNCHAINED_LABS_LUNATIC"
 
 
-VendorType = Union[Vendor, str]
+VendorType = Vendor | str
 
 
 _VENDOR_TO_PARSER: dict[Vendor, type[VendorParser]] = {

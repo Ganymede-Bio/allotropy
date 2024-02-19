@@ -1,5 +1,4 @@
 from collections.abc import Mapping
-from typing import Union
 
 import pandas as pd
 
@@ -46,22 +45,9 @@ from allotropy.parsers.utils.uuids import random_uuid_str
 from allotropy.parsers.utils.values import assert_not_none
 from allotropy.parsers.vendor_parser import VendorParser
 
-ConcentrationType = Union[
-    TQuantityValueMicrogramPerMicroliter,
-    TQuantityValueMicrogramPerMilliliter,
-    TQuantityValueMilligramPerMilliliter,
-    TQuantityValueNanogramPerMicroliter,
-    TQuantityValueNanogramPerMilliliter,
-    TQuantityValuePicogramPerMilliliter,
-]
-ConcentrationClassType = Union[
-    type[TQuantityValueMicrogramPerMicroliter],
-    type[TQuantityValueMicrogramPerMilliliter],
-    type[TQuantityValueMilligramPerMilliliter],
-    type[TQuantityValueNanogramPerMicroliter],
-    type[TQuantityValueNanogramPerMilliliter],
-    type[TQuantityValuePicogramPerMilliliter],
-]
+ConcentrationType = TQuantityValueMicrogramPerMicroliter | TQuantityValueMicrogramPerMilliliter | TQuantityValueMilligramPerMilliliter | TQuantityValueNanogramPerMicroliter | TQuantityValueNanogramPerMilliliter | TQuantityValuePicogramPerMilliliter
+
+ConcentrationClassType = type[TQuantityValueMicrogramPerMicroliter] | type[TQuantityValueMicrogramPerMilliliter] | type[TQuantityValueMilligramPerMilliliter] | type[TQuantityValueNanogramPerMicroliter] | type[TQuantityValueNanogramPerMilliliter] | type[TQuantityValuePicogramPerMilliliter]
 
 CONCENTRATION_UNIT_TO_TQUANTITY: Mapping[str, ConcentrationClassType] = {
     "ug/ul": TQuantityValueMicrogramPerMicroliter,

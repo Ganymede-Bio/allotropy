@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import Union
 
 from allotropy.exceptions import AllotropeConversionError
 
@@ -27,16 +26,16 @@ class TStringValueItem:
 
 TBooleanArray = list[bool]
 TBooleanOrNullArray = list[bool | None]
-TBooleanValue = Union[bool, TBooleanValueItem]
+TBooleanValue = bool | TBooleanValueItem
 TClass = str
-TDateTimeValue = Union[str, TDateTimeValueItem]
+TDateTimeValue = str | TDateTimeValueItem
 # TODO(brian): inline this
 TDateTimeStampValue = TDateTimeValue
 TNumberArray = list[float]
 TNumberOrNullArray = list[float | None]
 TStringArray = list[str]
 TStringOrNullArray = list[str | None]
-TStringValue = Union[str, TStringValueItem]
+TStringValue = str | TStringValueItem
 TTupleData = list[float | bool | str | None]
 TUnit = str
 
@@ -62,7 +61,7 @@ class InvalidJsonFloat(Enum):
     field_Infinity_1 = "-Infinity"
 
 
-JsonFloat = Union[float, InvalidJsonFloat]
+JsonFloat = float | InvalidJsonFloat
 
 
 @dataclass
@@ -125,10 +124,10 @@ class TDatacubeComponent:
     field_asm_fill_value: str | float | int | bool | None = None
 
 
-TDimensionArray = Union[TNumberArray, TBooleanArray, TStringArray]
+TDimensionArray = TNumberArray | TBooleanArray | TStringArray
 
 
-TMeasureArray = Union[TNumberOrNullArray, TBooleanOrNullArray, TStringOrNullArray]
+TMeasureArray = TNumberOrNullArray | TBooleanOrNullArray | TStringOrNullArray
 
 
 @dataclass
