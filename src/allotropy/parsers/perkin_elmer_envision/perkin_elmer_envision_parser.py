@@ -63,9 +63,18 @@ class ReadType(Enum):
     LUMINESCENCE = "Luminescence"
 
 
-MeasurementDocumentItems = UltravioletAbsorbancePointDetectionMeasurementDocumentItems | FluorescencePointDetectionMeasurementDocumentItems | LuminescencePointDetectionMeasurementDocumentItems
+MeasurementDocumentItems = (
+    UltravioletAbsorbancePointDetectionMeasurementDocumentItems
+    | FluorescencePointDetectionMeasurementDocumentItems
+    | LuminescencePointDetectionMeasurementDocumentItems
+)
 
-DeviceControlAggregateDocument = UltravioletAbsorbancePointDetectionDeviceControlAggregateDocument | FluorescencePointDetectionDeviceControlAggregateDocument | LuminescencePointDetectionDeviceControlAggregateDocument
+DeviceControlAggregateDocument = (
+    UltravioletAbsorbancePointDetectionDeviceControlAggregateDocument
+    | FluorescencePointDetectionDeviceControlAggregateDocument
+    | LuminescencePointDetectionDeviceControlAggregateDocument
+)
+
 
 def safe_value(cls: type[T], value: Any | None) -> T | None:
     return None if value is None else cls(value=value)  # type: ignore[call-arg]

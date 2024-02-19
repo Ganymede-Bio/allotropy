@@ -28,7 +28,7 @@ class NucleoviewReader:
         if "Time zone offset" in raw_data.columns and "Date time" in raw_data.columns:
             raw_data.loc[
                 ~raw_data["Time zone offset"].str.startswith("-"), "Time zone offset"
-            ] = ("+" + raw_data["Time zone offset"])
+            ] = "+" + raw_data["Time zone offset"]
 
             # combine date time and UTC offset
             raw_data["datetime"] = pd.to_datetime(

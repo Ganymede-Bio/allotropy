@@ -318,9 +318,7 @@ class ProcessedDataDocumentItem1:
     data_processing_document: DataProcessingDocument | None = None
     data_source_aggregate_document: DataSourceAggregateDocument | None = None
     processed_data_identifier: TStringValue | None = None
-    fluorescent_tag_positive_cell_density: TQuantityValueMillionCellsPerMilliliter | None = (
-        None
-    )
+    fluorescent_tag_positive_cell_density: TQuantityValueMillionCellsPerMilliliter | None = None
     fluorescent_tag_positive_percentage: TQuantityValuePercent | None = None
     field_index: int | None = None
 
@@ -429,9 +427,7 @@ class ProcessedDataDocumentItem:
     data_processing_document: DataProcessingDocument | None = None
     data_source_aggregate_document: DataSourceAggregateDocument | None = None
     processed_data_identifier: TStringValue | None = None
-    total_cell_density__cell_counter_: TQuantityValueMillionCellsPerMilliliter | None = (
-        None
-    )
+    total_cell_density__cell_counter_: TQuantityValueMillionCellsPerMilliliter | None = None
     dead_cell_density__cell_counter_: TQuantityValueMillionCellsPerMilliliter | None = (
         None
     )

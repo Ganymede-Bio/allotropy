@@ -22,7 +22,11 @@ INVALID_FILENAME_MESSAGE = (
     "or SampleResults<Analyzer ID>YYYY-MM-DD_HHMMSS.csv where <Analyzer ID> is defined in Settings"
 )
 
-MOLAR_CONCENTRATION_CLASSES = TNullableQuantityValueMillimolePerLiter | TNullableQuantityValueGramPerLiter | TNullableQuantityValueUnitPerLiter
+MOLAR_CONCENTRATION_CLASSES = (
+    TNullableQuantityValueMillimolePerLiter
+    | TNullableQuantityValueGramPerLiter
+    | TNullableQuantityValueUnitPerLiter
+)
 
 
 ALL_MOLAR_CONCENTRATION_CLASSES: list[

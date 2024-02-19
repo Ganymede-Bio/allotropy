@@ -43,9 +43,7 @@ class SampleDocument:
 @dataclass
 class AnalyteDocumentItem:
     analyte_name: TStringValue
-    molar_concentration: TNullableQuantityValueMillimolePerLiter | TNullableQuantityValueGramPerLiter | TNullableQuantityValueUnitPerLiter | None = (
-        None
-    )
+    molar_concentration: TNullableQuantityValueMillimolePerLiter | TNullableQuantityValueGramPerLiter | TNullableQuantityValueUnitPerLiter | None = None
 
 
 @dataclass
@@ -66,21 +64,11 @@ class MeasurementDocumentItem:
     pH: TNullableQuantityValuePH | None = None
     osmolality: TNullableQuantityValueMilliOsmolesPerKilogram | None = None
     viability__cell_counter_: TNullableQuantityValuePercent | None = None
-    total_cell_density__cell_counter_: TNullableQuantityValueMillionCellsPerMilliliter | None = (
-        None
-    )
-    viable_cell_density__cell_counter_: TNullableQuantityValueMillionCellsPerMilliliter | None = (
-        None
-    )
-    average_live_cell_diameter__cell_counter_: TNullableQuantityValueMicrometer | None = (
-        None
-    )
-    average_total_cell_diameter__cell_counter_: TNullableQuantityValueMicrometer | None = (
-        None
-    )
-    total_cell_diameter_distribution__cell_counter_: TNullableQuantityValueTODO | None = (
-        None
-    )
+    total_cell_density__cell_counter_: TNullableQuantityValueMillionCellsPerMilliliter | None = None
+    viable_cell_density__cell_counter_: TNullableQuantityValueMillionCellsPerMilliliter | None = None
+    average_live_cell_diameter__cell_counter_: TNullableQuantityValueMicrometer | None = None
+    average_total_cell_diameter__cell_counter_: TNullableQuantityValueMicrometer | None = None
+    total_cell_diameter_distribution__cell_counter_: TNullableQuantityValueTODO | None = None
     viable_cell_count__cell_counter_: TNullableQuantityValueCell | None = None
     total_cell_count__cell_counter_: TNullableQuantityValueCell | None = None
 

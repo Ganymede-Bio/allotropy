@@ -423,12 +423,8 @@ class UltravioletAbsorbancePointDetectionDeviceControlDocumentItem(
     detector_bandwidth_setting: TQuantityValueNanometer | None = None
     electronic_absorbance_wavelength_setting: TQuantityValueNanometer | None = None
     electronic_absorbance_bandwidth_setting: TQuantityValueNanometer | None = None
-    electronic_absorbance_reference_bandwidth_setting: TQuantityValueNanometer | None = (
-        None
-    )
-    electronic_absorbance_reference_wavelength_setting: TQuantityValueNanometer | None = (
-        None
-    )
+    electronic_absorbance_reference_bandwidth_setting: TQuantityValueNanometer | None = None
+    electronic_absorbance_reference_wavelength_setting: TQuantityValueNanometer | None = None
     field_index: int | None = None
 
 

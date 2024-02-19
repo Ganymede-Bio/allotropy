@@ -185,5 +185,8 @@ class Data:
 
         return Data(
             title=Title.create(reader.title_data),
-            samples=[Sample.create(name, batch, reader.samples_data) for name, batch in sample_groups],  # type: ignore[has-type, misc]
+            samples=[
+                Sample.create(name, batch, reader.samples_data)
+                for name, batch in sample_groups
+            ],  # type: ignore[has-type, misc]
         )

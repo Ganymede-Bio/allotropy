@@ -43,7 +43,7 @@ def _assert_allotrope_dicts_equal(
         MEASUREMENT_IDENTIFIER,
     ]
     exclude_regex_paths = [
-        fr"\['{exclude_id}'\]" for exclude_id in identifiers_to_exclude
+        rf"\['{exclude_id}'\]" for exclude_id in identifiers_to_exclude
     ]
     ddiff = DeepDiff(
         expected_replaced,

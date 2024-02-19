@@ -55,10 +55,14 @@ def lint_file(model_path: str) -> None:
     )
     # The second call to ruff checks for additional rules.
     subprocess.check_call(
-        f"ruff {model_path} --fix", shell=True, stdout=subprocess.DEVNULL  # noqa: S602
+        f"ruff {model_path} --fix",
+        shell=True,
+        stdout=subprocess.DEVNULL,  # noqa: S602
     )
     subprocess.check_call(
-        f"black {model_path}", shell=True, stderr=subprocess.DEVNULL  # noqa: S602
+        f"black {model_path}",
+        shell=True,
+        stderr=subprocess.DEVNULL,  # noqa: S602
     )
 
 
