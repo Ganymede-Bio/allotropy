@@ -68,9 +68,7 @@ CELL_CULTURE_NULLABLE_VALUE_CLASSES: dict[Any, set[str]] = {
     AnalyteDocumentItem: {"molar_concentration"},
 }
 
-QPCR_NULLABLE_VALUE_CLASSES: dict[Any, set[str]] = {
-    ProcessedDataDocumentItem: {"cycle_threshold_result"}
-}
+QPCR_NULLABLE_VALUE_CLASSES: dict[Any, set[str]] = {ProcessedDataDocumentItem: {"cycle_threshold_result"}}
 
 EMPTY_VALUE_CLASS_AND_FIELD = {
     **CELL_CULTURE_NULLABLE_VALUE_CLASSES,
@@ -108,9 +106,7 @@ def serialize_allotrope(model: Any) -> dict[str, Any]:
                 return converter.unstructure(obj)
 
             return {
-                get_key(k): v
-                for k, v in make_unstructure_fn(type(obj))(obj).items()
-                if not should_omit(k, v)
+                get_key(k): v for k, v in make_unstructure_fn(type(obj))(obj).items() if not should_omit(k, v)
             }
 
         # This custom unstructure function overrides the unstruct_hook when we should should_allow_empty_value_field.
@@ -123,11 +119,11 @@ def serialize_allotrope(model: Any) -> dict[str, Any]:
                     converter,
                     **{
                         a.name: override(
-                            unstruct_hook=unstructure_dataclass_fn(
-                                subcls, should_omit_allow_empty_value_field
+                            unstruct_hook=(
+                                unstructure_dataclass_fn(subcls, should_omit_allow_empty_value_field)
+                                if should_allow_empty_value_field(cls, a.name)
+                                else None
                             )
-                            if should_allow_empty_value_field(cls, a.name)
-                            else None
                         )
                         for a in fields(cls)
                     },
@@ -141,9 +137,46 @@ def serialize_allotrope(model: Any) -> dict[str, Any]:
     return cast(dict[str, Any], result)
 
 
+def replace_key_underscores(d):
+    """
+    Recursively replace the second to last space with '(' and the last space with ')' in dictionary keys.
+
+    :param d: The dictionary to process.
+    :return: A new dictionary with updated keys.
+    """
+    new_dict = {}
+    for key, value in d.items():
+        if isinstance(value, dict):
+            val = replace_key_underscores(value)
+        elif isinstance(value, list):
+            val = [replace_key_underscores(v) for v in value]
+        else:
+            val = value
+
+        # Check if the key ends with an underscore and has more than one underscore
+        if key.endswith(" ") and key.count(" ") > 1:
+            # Find the index of the second to last underscore
+            last_underscore_index = key.rfind(" ")
+            second_last_underscore_index = key.rfind(" ", 0, last_underscore_index)
+
+            # Replace the second to last underscore with '(' and the last underscore with ')'
+            new_key = (
+                key[:second_last_underscore_index]
+                + "("
+                + key[second_last_underscore_index + 1 : last_underscore_index]
+                + ")"
+            )
+        else:
+            new_key = key
+
+        new_dict[new_key] = val
+
+    return new_dict
+
+
 def serialize_and_validate_allotrope(model: Any) -> dict[str, Any]:
     try:
-        allotrope_dict = serialize_allotrope(model)
+        allotrope_dict = replace_key_underscores(serialize_allotrope(model))
     except Exception as e:
         msg = f"Failed to serialize allotrope model: {e}"
         raise AllotropeConversionError(msg) from e
