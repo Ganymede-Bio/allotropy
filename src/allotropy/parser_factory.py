@@ -118,6 +118,7 @@ from allotropy.parsers.unchained_labs_lunatic.unchained_labs_lunatic_parser impo
 )
 from allotropy.parsers.utils.timestamp_parser import TimestampParser
 from allotropy.parsers.vendor_parser import VendorParser
+from allotropy.parsers.waters_acquity.waters_acquity_parser import WatersAcquityParser
 
 
 class Vendor(Enum):
@@ -169,6 +170,7 @@ class Vendor(Enum):
     THERMO_FISHER_VISIONLITE = "THERMO_FISHER_VISIONLITE"
     THERMO_SKANIT = "THERMO_SKANIT"
     UNCHAINED_LABS_LUNATIC = "UNCHAINED_LABS_LUNATIC"
+    WATERS_ACQUITY = "WATERS_ACQUITY"
 
     @property
     def display_name(self) -> str:
@@ -262,6 +264,7 @@ _VENDOR_TO_PARSER: dict[Vendor, type[VendorParser[Any, Any]]] = {
     Vendor.THERMO_FISHER_QUBIT_FLEX: ThermoFisherQubitFlexParser,
     Vendor.THERMO_FISHER_VISIONLITE: ThermoFisherVisionliteParser,
     Vendor.THERMO_SKANIT: ThermoSkanItParser,
+    Vendor.WATERS_ACQUITY: WatersAcquityParser,
     Vendor.UNCHAINED_LABS_LUNATIC: UnchainedLabsLunaticParser,
 }
 
