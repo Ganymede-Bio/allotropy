@@ -182,23 +182,18 @@ class Vendor(Enum):
 
     @property
     def supported_extensions(self) -> list[str]:
-        return [
-            ext.strip() for ext in self.get_parser().SUPPORTED_EXTENSIONS.split(",")
-        ]
+        return [ext.strip() for ext in self.get_parser().SUPPORTED_EXTENSIONS.split(",")]
 
     @property
     def asm_versions(self) -> list[str]:
         # NOTE: this is a list because soon parsers will support multiple schemas as they are upgraded.
-        manifests = [
-            Path(manifest) for manifest in [self.get_parser()._get_mapper().MANIFEST]
-        ]
+        manifests = [Path(manifest) for manifest in [self.get_parser()._get_mapper().MANIFEST]]
         return ["/".join(manifest.parts[-4:-1]).split(".")[0] for manifest in manifests]
 
     @property
     def technique(self) -> str:
         techniques = [
-            Path(manifest).stem
-            for manifest in [self.get_parser()._get_mapper().MANIFEST]
+            Path(manifest).stem for manifest in [self.get_parser()._get_mapper().MANIFEST]
         ]
         if not all(tech == techniques[0] for tech in techniques):
             msg = f"Parser {self} supports multiple technique types, if this is expected please update logic."
@@ -209,9 +204,7 @@ class Vendor(Enum):
             "Qpcr": "qPCR",
         }.get(technique, technique)
 
-    def get_parser(
-        self, default_timezone: tzinfo | None = None
-    ) -> VendorParser[Any, Any]:
+    def get_parser(self, default_timezone: tzinfo | None = None) -> VendorParser[Any, Any]:
         timestamp_parser = TimestampParser(default_timezone)
         return _VENDOR_TO_PARSER[self](timestamp_parser)
 
@@ -294,9 +287,7 @@ def get_table_contents() -> str:
 
     contents += '[cols="4*^.^"]\n'
     contents += "|===\n"
-    contents += (
-        "|Instrument Category|Instrument Software|Release Status|Exported ASM Schema\n"
-    )
+    contents += "|Instrument Category|Instrument Software|Release Status|Exported ASM Schema\n"
     for technique in sorted(table_data):
         vendors = table_data[technique]
         contents += f".{len(vendors)}+|{technique}|{vendors[0].display_name}|{vendors[0].release_state}|{vendors[0].asm_versions[0]}\n"
