@@ -40,7 +40,7 @@ def lint_file(model_path: Path) -> None:
         subprocess.check_call(
             # We must ignore N999, which checks filename for valid module path, because this is being
             # called with a backup file named <real_model_path>.<uuid>.bak.py.
-            f"ruff --ignore N999 {model_path} --fix",
+            f"ruff check --ignore N999 {model_path} --fix",
             shell=True,  # noqa: S602
             stdout=subprocess.DEVNULL,
         )
@@ -66,12 +66,14 @@ def lint_file(model_path: Path) -> None:
     )
     # The second call to ruff checks for additional rules.
     subprocess.check_call(
-        f"ruff --ignore N999 {model_path} --fix",
+        f"ruff check --ignore N999 {model_path} --fix",
         shell=True,  # noqa: S602
         stdout=subprocess.DEVNULL,
     )
     subprocess.check_call(
-        f"black {model_path}", shell=True, stderr=subprocess.DEVNULL  # noqa: S602
+        f"black {model_path}",
+        shell=True,
+        stderr=subprocess.DEVNULL,  # noqa: S602
     )
 
 
@@ -87,9 +89,7 @@ def _generate_schema(model_path: Path, schema: dict[str, Any]) -> None:
         warnings.filterwarnings(
             "ignore",
             category=UserWarning,
-            message=re.escape(
-                "format of 'iri' not understood for 'string' - using default"
-            ),
+            message=re.escape("format of 'iri' not understood for 'string' - using default"),
         )
         # Generate models
         with tempfile.NamedTemporaryFile("w") as fp:
@@ -171,9 +171,7 @@ def generate_schemas(
             if is_file_changed(model_path):
                 models_changed.append(model_path.stem)
 
-    with backup_paths(
-        GENERATED_SHARED_PATHS, restore=dry_run
-    ) as working_generated_paths:
+    with backup_paths(GENERATED_SHARED_PATHS, restore=dry_run) as working_generated_paths:
         update_unit_files(unit_to_iri, *working_generated_paths)
         for path in working_generated_paths:
             if path.suffix == ".py":
