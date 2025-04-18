@@ -113,7 +113,7 @@ path = "src/allotropy/__about__.py"
 # Pin default enviroment to 3.11. We aim to support 3.10+, but for fast testing, the default test command runs
 # 3.11. Use hatch run test_all to tests against 3.10-3.12
 # Note: if your hatch env is not picking up this setting, run hatch env prune.
-python = "3.11.9"
+python = "3.11.8"
 # We define dependencies for linting and datamodel codegen in the default environment because we lint in
 # the generation script, and we test generation in tests, so we need them everywhere except the actual project.
 dependencies = [
@@ -124,7 +124,7 @@ dependencies = [
   # Without jsonschema-spec and pydantic, pydantic spews a bunch of errors when parsing schemas
   "jsonschema-specifications == 2023.7.1",
   "pydantic == 1.10.17",
-  "ruff == 0.0.289",
+  "ruff == 0.*",
   "semantic-version",
 ]
 
@@ -180,12 +180,12 @@ extra-dependencies = [
 [tool.hatch.envs.lint.scripts]
 typing = "mypy --install-types --non-interactive {args:src/allotropy scripts tests}"
 style = [
-  "ruff {args:.}",
+  "ruff check {args:.}",
   "black --check --diff {args:.}",
 ]
 fmt = [
   "black {args:.}",
-  "ruff --fix {args:.}",
+  "ruff check --fix {args:.}",
   "style",
 ]
 all = [
